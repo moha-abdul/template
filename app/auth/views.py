@@ -1,5 +1,5 @@
 from flask import render_template , redirect , url_for , flash , request
-from flask_login import login_user
+from flask_login import login_user , logout_user , login_required
 from . import auth
 
 from .. import db
@@ -25,6 +25,15 @@ def login():
     return render_template('auth/login.html' , login_form = login_form, title = title)
 
 
+''''
+    Route for loggin out users and redirect them to the index.html / home page
+'''
+@auth.route('/logged-out')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
+
 
 @auth.route('/register', methods=["GET","POST"])
 def register():
@@ -39,4 +48,4 @@ def register():
 
         title = "New Account"
 
-    return render_template('/auth/register.html' , register_form = form)
+    return render_template('/auth/register.html' ,title=title, register_form = form)
