@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField , BooleanField
+from wtforms import StringField,PasswordField,SubmitField,BooleanField
 from wtforms.validators import Required,Email,EqualTo 
 from ..models import User
 from wtforms import ValidationError
@@ -23,7 +23,7 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField("Your email address :" validators = [Required() , Email() ])
+    email = StringField("Your email address",validators = [Required() , Email()] )
     password = PasswordField("Enter password",validators = [Required()] )
     remember = BooleanField('Remember')
     submit = SubmitField('Sign In')
