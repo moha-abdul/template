@@ -12,8 +12,10 @@
         {% endblock %}
         <!-- Content block -->
     </head>
-    <body>
-        <!-- Content block -->
+<body>
+
+    <div class="container-fluid">
+                <!-- Content block -->
         {% block content %}
 
             <div class="container">
@@ -23,17 +25,20 @@
                 </form>
             </div>
 
-        <!-- Popular movie -->
-        <h3> Popular Movies</h3>
-        <ul>
-            {{ macro.displayMovieList(popular)}}
-        </ul>
-        <!-- Upcoming movie  -->
-        <h3> Upcoming Movies </h3>
-        <ul>
-            {{ macro.displayMovieList(upcoming)}}
-        </ul>
+                <!-- Popular movie -->
+                <h3> Popular Movies</h3>
+                <ul>
+                    {{ macro.displayMovieList(popular)}}
+                </ul>
+                <!-- Upcoming movie  -->
+                <h3> Upcoming Movies </h3>
+                <ul>
+                    {{ macro.displayMovieList(upcoming)}}
+                </ul>
         
         {% endblock%}
-    </body>
+    </div>
+       
+
+</body>
 </html>
