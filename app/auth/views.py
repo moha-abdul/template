@@ -8,11 +8,10 @@ from .forms import RegistrationForm , LoginForm
 
 
 
-@auth.route('/auth' ,methods=["GET","POST"])
+@auth.route('/login' ,methods=["GET","POST"])
 def login():
     login_form = LoginForm()
-    title = 'Watchlist Login'
-    
+      
     if login_form.validate_on_submit():
         user = User.query.filter_by(email = login_form.email.data).first()
 
@@ -21,18 +20,20 @@ def login():
             return redirect(request.args.get('next') or url_for('main.index'))
         
         flash ("Invalid username or password")
-    
+    title = 'Watchlist Login'
     return render_template('auth/login.html' , login_form = login_form, title = title)
 
 
 ''''
     Route for loggin out users and redirect them to the index.html / home page
 '''
-@auth.route('/logged-out')
+@auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
 
 
 @auth.route('/register', methods=["GET","POST"])
@@ -46,6 +47,6 @@ def register():
         db.session.commit()
         return redirect(url_for('.login'))
 
-        title = "New Account"
+        # title = "New Account"
 
-    return render_template('/auth/register.html' ,title=title, register_form = form)
+    return render_template('auth/register.html', registration_form = form)

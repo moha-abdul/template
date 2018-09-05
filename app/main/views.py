@@ -2,9 +2,9 @@ from flask import render_template,request,redirect,url_for
 from . import main
 from ..requests import get_movies,get_movie,search_movie
 from .forms import ReviewForm
-from ..models import Review
+from ..models import Review , User
 
-
+from .. import db , photos
 from flask_login import login_required
 
 
@@ -62,4 +62,21 @@ def new_review(id):
         return redirect(url_for('.movie',id = movie.id ))
 
     title = f'{movie.title} review'
-    return render_template('main.new_review',title = title, review_form=form, movie=movie)
+    return render_template('new_review.html',title = title, review_form=form, movie=movie)
+
+
+
+@main.route('/profile/<username>/upload/pic',methods =["POST"])
+@login_required
+def profile_pic(username):
+
+    user = User.query.filter_by(username = username).first()
+
+    if 'photos' in request.files:
+        filename = photos.save(request.files['photos'])
+        path = f"photos/{filename}"
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for("main.profile",username=username))
+    
+

@@ -1,4 +1,7 @@
-export MOVIE_API_KEY = '8b46bf011a4d4f8262af3c63dee4d9fd'
-export SECRET_KEY = 'bxxfcxa43xf7xd9xc6)xefxf8c'
+export MOVIE_API_KEY=8b46bf011a4d4f8262af3c63dee4d9fd
+export SECRET_KEY=bxxfcxa43xf7xd9xc6xefxf8c
+
+export MAIL_USERNAME=mohammed.abdulla0602@gmail.com
+export MAIL_PASSWORD=maxalkjdfj
 
 python3.6 manage.py server
