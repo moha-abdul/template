@@ -8,6 +8,7 @@ from .. import db , photos
 from flask_login import login_required
 
 
+
 @main.route('/')
 def index():
 

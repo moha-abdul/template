@@ -5,6 +5,7 @@ from . import auth
 from .. import db
 from ..models import User
 from .forms import RegistrationForm , LoginForm
+from ..email import mail_message
 
 
 
@@ -47,6 +48,7 @@ def register():
         db.session.commit()
         return redirect(url_for('.login'))
 
+        mail_message("Welcome to Watchlist", "email/welcome_user",user.email,user=user)
         # title = "New Account"
 
     return render_template('auth/register.html', registration_form = form)
