@@ -1,10 +1,11 @@
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for , abort
 from . import main
 from ..requests import get_movies,get_movie,search_movie
-from .forms import ReviewForm
+from .forms import ReviewForm ,UpdateProfile
 from ..models import Review , User
 
 from .. import db , photos
+
 from flask_login import login_required
 
 
@@ -81,3 +82,36 @@ def profile_pic(username):
     return redirect(url_for("main.profile",username=username))
     
 
+'''
+A route to redirect you to a user's profile
+'''
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
+
+
+'''
+A route to take you to edit user's profile 
+'''
+
+@main.route('/user/<username>/update')
+@login_required
+def update_profile(username):
+    user = User.query.filter_by(username = username).first()
+
+    if username is None:
+        abort(404)
+    
+    if form.validate_on_submit():
+        user.bio = form.bio.data 
+        db.session.add(user)
+        db.commit(user)
+
+        return redirect(url_for('.profile',uname=username))
+
+    return render_template()
