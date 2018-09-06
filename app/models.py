@@ -78,11 +78,11 @@ class Review(db.Model):
 
     # all_reviews = []
 
-    def __init__(self,movie_id,title,imageurl,review):
-        self.movie_id = movie_id
-        self.title = title
-        self.imageurl = imageurl
-        self.review = review
+    # def __init__(self,movie_id,title,imageurl,review):
+    #     self.movie_id = movie_id
+    #     self.title = title
+    #     self.imageurl = imageurl
+    #     self.review = review
 
 
     def save_review(self):
